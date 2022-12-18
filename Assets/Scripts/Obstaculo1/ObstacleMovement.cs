@@ -12,6 +12,9 @@ public class ObstacleMovement : MonoBehaviour
     private bool moveNext = true;
     [SerializeField] float timeToNext = 1.0f;
 
+    //Sound
+    [SerializeField] AudioSource elevatorSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +30,15 @@ public class ObstacleMovement : MonoBehaviour
     void movePlatform()
     {
         if (moveNext)
+        {
             transform.position = Vector3.MoveTowards(transform.position, waypoints[waypointIndex].transform.position, speed * Time.deltaTime);
+            if (!elevatorSound.isPlaying)
+                elevatorSound.Play();
+        }
+        else
+        {
+            elevatorSound.Stop();
+        }
 
         if (Vector3.Distance(transform.position, waypoints[waypointIndex].transform.position) < 0.1f)
         {

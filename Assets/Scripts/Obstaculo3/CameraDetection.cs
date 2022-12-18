@@ -8,6 +8,9 @@ public class CameraDetection : MonoBehaviour
     private string playerTag = "Player";
     [SerializeField] private Material searching, spotted;
 
+    //Sound
+    [SerializeField] AudioSource alarmSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,11 +37,14 @@ public class CameraDetection : MonoBehaviour
                     cameraLens.GetComponentInParent<MeshRenderer>().material = spotted;
                     //Debug.Log("Detectando player");
                     transform.parent.parent.GetComponent<CameraRotation>().PlayerSpotted();
+                    if (!alarmSound.isPlaying)
+                        alarmSound.Play();
                 }
                 else
                 {
                     cameraLens.GetComponentInParent<MeshRenderer>().material = searching;
                     transform.parent.parent.GetComponent<CameraRotation>().PlayerNotDetected();
+                    alarmSound.Stop();
                 }
             }
         }
@@ -50,6 +56,7 @@ public class CameraDetection : MonoBehaviour
         {
             cameraLens.GetComponentInParent<MeshRenderer>().material = searching;
             transform.parent.parent.GetComponent<CameraRotation>().PlayerNotDetected();
+            alarmSound.Stop();
         }
     }
 }

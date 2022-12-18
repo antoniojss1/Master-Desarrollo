@@ -8,6 +8,9 @@ public class Obstacle2Movement : MonoBehaviour
     [SerializeField] private float speed = 1.5f;
     private int waypointIndex = 0;
 
+    //Sound
+    [SerializeField] AudioSource platformSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +32,8 @@ public class Obstacle2Movement : MonoBehaviour
         }
 
         transform.position = Vector3.MoveTowards(transform.position, waypoints[waypointIndex].transform.position, speed * Time.deltaTime);
+        if (!platformSound.isPlaying)
+            platformSound.Play();
 
         if (Vector3.Distance(transform.position, waypoints[waypointIndex].transform.position) < 0.1f)
         {
