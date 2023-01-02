@@ -13,6 +13,8 @@ public class CameraRotation : MonoBehaviour
     private Quaternion initialRotation;
     private bool playerDetection = false;
 
+    [SerializeField] CharacterStats charStats;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -101,12 +103,13 @@ public class CameraRotation : MonoBehaviour
     IEnumerator CatchedPlayer()
     {
         if (playerDetection)
-            yield return new WaitForSeconds(3f);                //Espera tres segundos si se detecta un jugador
+            yield return new WaitForSeconds(2f);                //Espera tres segundos si se detecta un jugador
 
         if (playerDetection)
         {
-            //Si tras 3 segundos se sigue detectando jugador, quita vida
+            //Si tras 2 segundos se sigue detectando jugador, quita vida
             Debug.Log("Vida perdida");
+            charStats.LoseLife();
         }   
     }
 }
