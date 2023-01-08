@@ -8,7 +8,12 @@ public class CharacterStats : MonoBehaviour
 {
     [SerializeField] private int lives = 3;
     [SerializeField] private Text textElement;
+    [SerializeField] Transform playerRespawn;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(transform.gameObject);   
+    }
     private void Start()
     {
         textElement.text = lives.ToString();
@@ -20,6 +25,10 @@ public class CharacterStats : MonoBehaviour
             lives = 0;
             GameOver();
         }
+        else
+        {
+            teleportPlayer();
+        }
     }
 
     public void LoseLife()
@@ -29,9 +38,28 @@ public class CharacterStats : MonoBehaviour
         CheckLives();
     }
 
-    public void RestartLives(int newLives)
+    public void SetLives(int newLives)
     {
         lives = newLives;
+    }
+
+    public int GetLives()
+    {
+        return lives;
+    }
+
+    public void setRespawnPoint(Transform newRespawn)
+    {
+        playerRespawn = newRespawn;
+    }
+
+    public void teleportPlayer()
+    {
+        //Deshabiltiar character controller para que permita modificar la posicion directamente
+        CharacterController cc = GetComponent<CharacterController>();
+        cc.enabled = false;
+        transform.position = playerRespawn.position;  //tp a respawn
+        cc.enabled = true;
     }
 
     public void GameOver()

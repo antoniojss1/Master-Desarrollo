@@ -10,10 +10,12 @@ public class GameOverMenu : MonoBehaviour
     private void Start()
     {
         gameOverSound.Play();
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        Destroy(player);
 
     }
     public void RestartButton()
     {
-        SceneManager.LoadScene("EscenaPruebas");
+        SceneManager.LoadScene("Nivel1_Muelle");
     }
 }

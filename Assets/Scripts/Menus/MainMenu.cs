@@ -5,8 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    private void Start()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        Destroy(player);
+    }
+
     public void StartButton()
     {
-        SceneManager.LoadScene("EscenaPruebas");
+        SceneManager.LoadScene("Nivel1_Muelle");
     }
 }

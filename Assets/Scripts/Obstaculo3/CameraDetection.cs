@@ -59,4 +59,11 @@ public class CameraDetection : MonoBehaviour
             alarmSound.Stop();
         }
     }
+
+    public void playerTeleportedToRespawn()
+    {
+        cameraLens.GetComponentInParent<MeshRenderer>().material = searching;
+        transform.parent.parent.GetComponent<CameraRotation>().PlayerNotDetected();
+        alarmSound.Stop();
+    }
 }

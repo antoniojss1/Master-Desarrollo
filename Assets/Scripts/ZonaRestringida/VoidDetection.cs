@@ -6,6 +6,13 @@ public class VoidDetection : MonoBehaviour
 {
     private string playerTag = "Player";
     [SerializeField] CharacterStats charStats;
+    private void Awake()
+    {
+        if (charStats == null)
+        {
+            charStats = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterStats>();
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {

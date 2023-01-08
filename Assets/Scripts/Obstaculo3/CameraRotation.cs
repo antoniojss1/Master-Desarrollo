@@ -103,13 +103,14 @@ public class CameraRotation : MonoBehaviour
     IEnumerator CatchedPlayer()
     {
         if (playerDetection)
-            yield return new WaitForSeconds(2f);                //Espera tres segundos si se detecta un jugador
+            yield return new WaitForSeconds(2f);                //Espera un segundo si se detecta un jugador
 
         if (playerDetection)
         {
             //Si tras 2 segundos se sigue detectando jugador, quita vida
             Debug.Log("Vida perdida");
             charStats.LoseLife();
+            transform.GetComponentInChildren<CameraDetection>().playerTeleportedToRespawn();
         }   
     }
 }
